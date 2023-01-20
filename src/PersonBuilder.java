@@ -16,7 +16,11 @@ public class PersonBuilder {
 
     public PersonBuilder setAge(int age) {
         this.age = age;
-        return this;
+        if (age < 0) {
+            throw new IllegalArgumentException("Не верно указан возраст.");
+        } else {
+            return this;
+        }
     }
 
     public PersonBuilder setAdress(String adress) {
@@ -25,9 +29,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        if (age < 0) {
-            throw new IllegalArgumentException("Не верно указан возраст.");
-        } else if (surname == null || name == null) {
+        if (surname == null || name == null) {
             throw new IllegalStateException("Не указаны имя и фамилия.");
         } else {
             Person person = new Person(name, surname, age);
